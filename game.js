@@ -13,7 +13,6 @@ function update(){
     //Updating player
     player.update();
 
-
     //Updating existing bullets
     bullets.forEach(bullet => {
         bullet.update();
@@ -22,6 +21,12 @@ function update(){
         if (bullet.checkOutOfBounds()) {
             bullets.splice(bullets.indexOf(bullet), 1);
         }
+        
+        //Losing consition
+        if (bullet.checkPlayerCollision(player)){
+            player.dies();
+        }
+
     });
 
     //Spawining new bullets

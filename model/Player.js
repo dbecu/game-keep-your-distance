@@ -18,7 +18,6 @@ class Player{
         this.playerColor = color(255, 0, 0, 100);
     }
 
-
     //CONTROLS
     currentKey;
 

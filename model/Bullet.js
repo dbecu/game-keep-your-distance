@@ -38,7 +38,11 @@ class Bullet{
         return (this.xPos < 0 || this.xPos > windowWidth || this.yPos < 0 || this.yPos > windowHeight);
     }
 
-    checkCollision(){
+    checkPlayerCollision(player){
+        return this.#checkCollision(player.xPos, player.yPos, player.radius/2);
+    }
 
+    #checkCollision(xOther, yOther, radiusOther){
+        return (dist(this.xPos, this.yPos, xOther, yOther) <= this.size + radiusOther);
     }
 }
