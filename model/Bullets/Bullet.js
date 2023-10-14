@@ -23,7 +23,7 @@ class Bullet{
         this.direction = atan2(yPos - this.yPos, xPos - this.xPos);
     }
 
-    update(){
+    update(player){
         this.xPos += this.speed * cos(this.direction);
         this.yPos += this.speed * sin(this.direction);
 
@@ -41,10 +41,10 @@ class Bullet{
     }
 
     checkPlayerCollision(player){
-        return this.#checkCollision(player.xPos, player.yPos, player.radius/2);
+        return this.checkCollision(player.xPos, player.yPos, player.radius/2);
     }
 
-    #checkCollision(xOther, yOther, radiusOther){
+    checkCollision(xOther, yOther, radiusOther){
         return (this.isCollidable && dist(this.xPos, this.yPos, xOther, yOther) <= this.size + radiusOther);
     }
 }

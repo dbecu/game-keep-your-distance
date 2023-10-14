@@ -6,7 +6,6 @@ let barrier;
 
 function setup(){
     createCanvas(windowWidth, windowHeight);
-    noCursor();
     levelHandler = new LevelHandler();
     this.createRestartButton();
     this.restart();
@@ -42,18 +41,18 @@ function update(){
         if (random(1) > 1 - (pow(0.1, mulitplier) * (levelHandler.level + 1))) {
         //if (random(1) > 1 - pow(0.1, levelHandler.level + 1)){
             let minSpeed = 2;
-            let maxSpeed = levelHandler.level + 1;
-            let minSize = 2;
+            let maxSpeed = constrain(levelHandler.level + 1, 2, 50);
+            let minSize = 3;
             let maxSize = constrain(levelHandler.level * 3, 5, 100);
 
-            if (random(1) > 0.6) {
+            if (random(1) > 0.2) {
                 bullets.push(new DefaultBullet(
                     minSpeed, maxSpeed,
                     minSize, maxSize,
                     player.xPos, player.yPos
                 ));
             } else {
-                if (random(1) > 0.6) {
+                if (random(1) > 0.8) {
                     bullets.push(new GhostBullet(
                         minSpeed, maxSpeed,
                         minSize, maxSize,
@@ -87,6 +86,7 @@ function draw(){
             bullet.draw();
         });
     } else {
+        cursor();
         restartButton.show();
     }
 }
@@ -125,6 +125,7 @@ function createRestartButton(){
 }
 
 function restart(){
+    noCursor();
     background(0);
     player = Player.createDefaultPlayer();
     bullets = [];

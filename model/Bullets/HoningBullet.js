@@ -1,6 +1,6 @@
 class HoningBullet extends Bullet{
     isHoning = true;
-    honingRadiusMuliplier = 3;
+    honingRadiusMuliplier = 2.5;
 
     constructor(minSpeed, maxSpeed, minSize, maxSize, xPlayerPos, yPlayerPos){
         super(minSpeed, maxSpeed, minSize, maxSize);
