@@ -6,6 +6,7 @@ let barrier;
 
 function setup(){
     createCanvas(windowWidth, windowHeight);
+    noCursor();
     levelHandler = new LevelHandler();
     this.createRestartButton();
     this.restart();
@@ -19,7 +20,7 @@ function update(){
 
     //Updating existing bullets
     bullets.forEach(bullet => {
-        bullet.update();
+        bullet.update(player);
 
         //Remove bullet that's out of bounds 
         //OR barrier touched bullet
@@ -40,11 +41,33 @@ function update(){
         let mulitplier = 2.2;
         if (random(1) > 1 - (pow(0.1, mulitplier) * (levelHandler.level + 1))) {
         //if (random(1) > 1 - pow(0.1, levelHandler.level + 1)){
-            bullets.push(new DefaultBullet(
-                2, levelHandler.level + 1,
-                2, constrain(levelHandler.level * 3, 5, 100),
-                player.xPos, player.yPos
-            ))
+            let minSpeed = 2;
+            let maxSpeed = levelHandler.level + 1;
+            let minSize = 2;
+            let maxSize = constrain(levelHandler.level * 3, 5, 100);
+
+            if (random(1) > 0.6) {
+                bullets.push(new DefaultBullet(
+                    minSpeed, maxSpeed,
+                    minSize, maxSize,
+                    player.xPos, player.yPos
+                ));
+            } else {
+                if (random(1) > 0.6) {
+                    bullets.push(new GhostBullet(
+                        minSpeed, maxSpeed,
+                        minSize, maxSize,
+                        player.xPos, player.yPos
+                    ))
+                } else {
+                    bullets.push(new HoningBullet(
+                        minSpeed, maxSpeed,
+                        minSize, maxSize,
+                        player.xPos, player.yPos
+                    ))
+
+                }
+            }
         }
     }
 }

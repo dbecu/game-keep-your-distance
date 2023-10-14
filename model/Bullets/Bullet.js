@@ -1,4 +1,6 @@
 class Bullet{
+    isCollidable = true;
+
     constructor(minSpeed, maxSpeed, minSize, maxSize){
         this.speed = random(minSpeed, maxSpeed);
         this.size = random(minSize, maxSize);
@@ -43,6 +45,6 @@ class Bullet{
     }
 
     #checkCollision(xOther, yOther, radiusOther){
-        return (dist(this.xPos, this.yPos, xOther, yOther) <= this.size + radiusOther);
+        return (this.isCollidable && dist(this.xPos, this.yPos, xOther, yOther) <= this.size + radiusOther);
     }
 }
