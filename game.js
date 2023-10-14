@@ -10,6 +10,10 @@ function setup(){
 }
 
 function update(){
+    //Updating player
+    player.update();
+
+
     //Updating existing bullets
     bullets.forEach(bullet => {
         bullet.update();
@@ -34,7 +38,7 @@ function update(){
 
 function draw(){
     this.update();
-
+    
     background(0);
 
     player.draw();
@@ -44,5 +48,9 @@ function draw(){
 }
 
 function keyPressed(){
-    player.update(keyCode);
+    player.keyPressed(keyCode);
+}
+
+function keyReleased() {
+    player.keyReleased();
 }

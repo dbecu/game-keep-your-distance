@@ -18,18 +18,30 @@ class Player{
         this.playerColor = color(255, 0, 0, 100);
     }
 
-    update(pressedKey){
-        if (this.isAlive) {
-            this.movement(pressedKey);
+
+    //CONTROLS
+    currentKey;
+
+    keyPressed(key){
+        this.currentKey = key;
+    }
+
+    keyReleased(){
+        this.currentKey = null;
+    }
+
+    update(){
+        if (this.isAlive && this.currentKey != null) {
+            this.#movement();
         }
     }
 
-    movement(pressedKey){
+    #movement(){
         let xTemp = this.xPos;
         let yTemp = this.yPos;
 
         //Controls
-        switch(pressedKey){
+        switch(this.currentKey){
             case 87:  //w
                 yTemp = this.yPos - this.speed;
                 break;
