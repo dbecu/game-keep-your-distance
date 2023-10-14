@@ -1,17 +1,18 @@
-let level = 1;
-
 let player;
 let bullets;
+let levelHandler;
 
 function setup(){
     createCanvas(windowWidth, windowHeight);
     player = Player.createDefaultPlayer();
     bullets = [];
+    levelHandler = new LevelHandler();
 }
 
 function update(){
-    //Updating player
+    //Updating 
     player.update();
+    levelHandler.update();
 
     //Updating existing bullets
     bullets.forEach(bullet => {
@@ -33,7 +34,7 @@ function update(){
     if (player.isAlive) {
         if (random(1) > 1 - pow(0.1, 2)){
             bullets.push(new DefaultBullet(
-                level, level + 1,
+                levelHandler.level, levelHandler.level + 1,
                 10, 20,
                 player.xPos, player.yPos
             ))
@@ -46,6 +47,7 @@ function draw(){
     
     background(0);
 
+    levelHandler.draw();
     player.draw();
     bullets.forEach(bullet => {
         bullet.draw();
