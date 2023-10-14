@@ -1,24 +1,25 @@
 class LevelHandler{
     levelingUpAmount = 10;
-    millisOffset = 0;
+    resetMillisOffset = 0;
+
+    range = 0.5;
 
     constructor(){
-        this.level = 0;
+        this.reset();
     }
 
     getSeconds(){
-        return int((millis()) / 1000);
-    }
-
-    nextLevel(){
-        this.level += 1;
-        this.millisOffset = millis();
+        return int((millis() - this.resetMillisOffset) / 1000);
     }
 
     update(){
-        if (this.getSeconds() - this.millisOffset/1000 >= this.levelingUpAmount){
-            this.nextLevel();
-        }
+        //Calculates the level
+        this.level = int(this.getSeconds() / this.levelingUpAmount);
+    }
+
+    reset(){
+        this.level = 0;
+        this.resetMillisOffset = millis();
     }
 
     draw(){
